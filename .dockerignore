@@ -1,0 +1,11 @@
+.git
+.agents
+node_modules
+dist
+backend/__pycache__
+backend/**/*.pyc
+backend/campushub.db
+backend/uploads
+backend/*.log
+.env
+backend/.env
