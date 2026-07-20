@@ -117,6 +117,10 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 @app.get("/", tags=["Health"])
 def root_health_check():
+    frontend_dist_dir = os.getenv("FRONTEND_DIST_DIR")
+    if frontend_dist_dir and Path(frontend_dist_dir).is_dir():
+        return FileResponse(Path(frontend_dist_dir) / "index.html")
+
     """Root health check — used by Render to confirm service is alive."""
     return {
         "success": True,
@@ -160,3 +164,4 @@ if frontend_dist_dir and Path(frontend_dist_dir).is_dir():
         if requested_file.is_relative_to(frontend_root) and requested_file.is_file():
             return FileResponse(requested_file)
         return FileResponse(frontend_root / "index.html")
+
